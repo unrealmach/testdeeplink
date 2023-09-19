@@ -5,16 +5,17 @@
   <script>
     function verificarEnlacePersonalizado() {
       var url = "com.appclubmiles://home";
-      
-      // Intenta abrir la URL personalizada en la aplicación.
-      window.location.href = url;
 
-      // Espera un corto período de tiempo antes de verificar si la aplicación se ha abierto.
-      setTimeout(function() {
-        if (!document.hidden) {
-          alert("La aplicación no está instalada o no se pudo abrir.");
+      // Intenta abrir la URL personalizada en segundo plano.
+      var popup = window.open(url, "_blank");
+
+      // Espera un corto período de tiempo antes de verificar si la ventana emergente se ha cerrado.
+      var interval = setInterval(function() {
+        if (popup.closed) {
+          clearInterval(interval);
+          alert("La aplicación se abrió y se cerró correctamente.");
         }
-      }, 2000); // Espera 2 segundos antes de verificar.
+      }, 1000); // Verifica cada 1 segundo.
     }
   </script>
 </head>
