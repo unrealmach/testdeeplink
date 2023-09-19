@@ -10,25 +10,7 @@
 
 <script>
 $(document).ready(function() {
-  // Captura el evento de clic en todos los enlaces con la clase "deep-link"
-  $(".deep-link").on("click", function(event) {
-    // Evita que se produzca la navegación estándar del enlace
-    event.preventDefault();
 
-    // Obtiene la URL del enlace
-    var linkURL = $(this).attr("href");
-
-    // Verifica si la URL coincide con el enlace profundo que deseas manejar
-    if (linkURL === "com.appclubmiles://home") {
-      // Realiza alguna acción específica, como abrir la aplicación
-      // o realizar alguna otra acción relacionada con el enlace profundo.
-      alert("Abriendo enlace profundoad: " + linkURL);
-    } else {
-      // Si la URL no coincide con el enlace profundo deseado,
-      // puedes realizar alguna otra acción o redirigir a otra página.
-      alert("La URL no coincide con el enlace profundo deseado.");
-    }
-  });
 });
 </script>
 
