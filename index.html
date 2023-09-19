@@ -13,7 +13,10 @@
       // Realiza una solicitud HEAD a la URL para verificar el estado de la respuesta.
       var xhr = new XMLHttpRequest();
       xhr.open("HEAD", url, true);
+      alert(url);
+      
       xhr.onreadystatechange = function() {
+        alert(xhr.status);
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             alert("¡La aplicación ya existe en la URL proporcionada!");
