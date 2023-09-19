@@ -7,21 +7,15 @@
       var url = "com.appclubmiles://home";
 
       // Intenta abrir la URL personalizada en la aplicación.
-      var xhr = new XMLHttpRequest();
-      xhr.open("HEAD", url, true);
-      xhr.onreadystatechange = function() {
-        alert(" readyState: "+ xhr.readyState);
-                alert(" status: "+xhr.status);
+      try {
+        window.location.href = url;
 
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            alert("¡La aplicación está instalada y se abrió!");
-          } else {
-            alert("La aplicación no está instalada o no se pudo abrir.");
-          }
-        }
-      };
-      xhr.send();
+        // La siguiente línea de código se ejecutará solo si la aplicación se abrió correctamente.
+        alert("¡La aplicación está instalada y se abrió!");
+      } catch (error) {
+        // Se produjo un error al intentar abrir la URL personalizada.
+        alert("La aplicación no está instalada o no se pudo abrir.");
+      }
     }
   </script>
 </head>
