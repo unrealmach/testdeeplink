@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ejemplo de manejo de enlaces profundos con jQuery</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <head>
-  <title>Verificar enlace en el navegador</title>
+  <title>Verificar enlace personalizado en la aplicación</title>
   <script>
-    function verificarEnlace() {
-      var enlace = document.getElementById("enlace");
-      var url = enlace.getAttribute("href");
-      
-      // Realiza una solicitud HEAD a la URL para verificar el estado de la respuesta.
+    function verificarEnlacePersonalizado() {
+      var url = "com.appclubmiles://home";
+
+      // Intenta abrir la URL personalizada en la aplicación.
       var xhr = new XMLHttpRequest();
       xhr.open("HEAD", url, true);
-      alert(url);
-      
       xhr.onreadystatechange = function() {
-        alert(xhr.status);
+        alert(xhr.readyState);
+                alert(xhr.status);
+
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            alert("¡La aplicación ya existe en la URL proporcionada!");
+            alert("¡La aplicación está instalada y se abrió!");
           } else {
-            alert("La URL no existe o ha ocurrido un error.");
+            alert("La aplicación no está instalada o no se pudo abrir.");
           }
         }
       };
@@ -29,16 +25,9 @@
     }
   </script>
 </head>
-</head>
 <body>
 
-<a href="com.appclubmiles://home" class="deep-link" id="enlace" onclick="verificarEnlace(); return false;">Abrir enlace profundo</a>
-
-<script>
-$(document).ready(function() {
-
-});
-</script>
+<a href="#" class="external-link" onclick="verificarEnlacePersonalizado(); return false;">Verificar enlace personalizado en la aplicación</a>
 
 </body>
 </html>
