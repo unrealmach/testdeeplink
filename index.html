@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Verificar enlace personalizado en la aplicación</title>
-  <script>
-    function verificarEnlacePersonalizado() {
-      var url = "com.appclubmiles://home";
-
-      // Intenta abrir la URL personalizada en segundo plano.
-      var popup = window.open(url, "_blank");
-
-      // Espera un corto período de tiempo antes de verificar si la ventana emergente se ha cerrado.
-      var interval = setInterval(function() {
-        if (popup.closed) {
-          clearInterval(interval);
-          alert("La aplicación se abrió y se cerró correctamente.");
-        }
-      }, 1000); // Verifica cada 1 segundo.
-    }
-  </script>
+  <title>Verificar URL en un iframe</title>
 </head>
 <body>
 
-<a href="#" class="external-link" onclick="verificarEnlacePersonalizado(); return false;">Verificar enlace personalizado en la aplicación</a>
+<iframe id="miIframe" src="about:blank" style="display:none;"></iframe>
+<button onclick="verificarYCerrarIframe()">Abrir y verificar</button>
+
+<script>
+function verificarYCerrarIframe() {
+  var url = "com.appclubmiles://home"; // Cambia esto por tu URL personalizada
+
+  var iframe = document.getElementById("miIframe");
+  iframe.src = url;
+
+  // Verificar cuando el iframe se ha cargado completamente
+  iframe.onload = function() {
+    alert("La URL se cargó correctamente en el iframe.");
+
+    // Cierra el iframe ocultándolo
+    iframe.style.display = "none";
+  };
+}
+</script>
 
 </body>
 </html>
