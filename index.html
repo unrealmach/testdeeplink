@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Verificar URL en un iframe</title>
+  <title>Verificar URL de Deep Link en un iframe y cerrar</title>
 </head>
 <body>
 
@@ -10,21 +10,25 @@
 
 <script>
 function verificarYCerrarIframe() {
-  var url = "com.appclubmiles://home"; // Cambia esto por tu URL personalizada
+  var deepLinkUrl = "com.appclubmiles://home"; // Cambia esto por tu URL de deep link
 
   var iframe = document.getElementById("miIframe");
-  iframe.src = url;
-    iframe.style.display = "none";
+  iframe.src = deepLinkUrl;
+      iframe.style.display = "none";
 
   // Verificar cuando el iframe se ha cargado completamente
-  iframe.onload = function() {
-    alert("La URL se cargó correctamente en el iframe.");
+  var interval = setInterval(function() {
+    if (iframe.contentWindow && iframe.contentWindow.location.href === "about:blank") {
+      clearInterval(interval);
+      alert("La URL de deep link se abrió y se cerró correctamente en el iframe.");
 
-    // Cierra el iframe ocultándolo
-    iframe.src = "about:blank";
-  };
+      // Cierra el iframe ocultándolo y configurando su src en blanco
+      iframe.src = "about:blank";
+    }
+  }, 1000); // Verifica cada 1 segundo.
 }
 </script>
 
 </body>
 </html>
+
