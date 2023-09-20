@@ -14,13 +14,14 @@ function verificarYCerrarIframe() {
 
   var iframe = document.getElementById("miIframe");
   iframe.src = url;
+    iframe.style.display = "none";
 
   // Verificar cuando el iframe se ha cargado completamente
   iframe.onload = function() {
     alert("La URL se cargó correctamente en el iframe.");
 
     // Cierra el iframe ocultándolo
-    iframe.style.display = "none";
+    iframe.src = "about:blank";
   };
 }
 </script>
