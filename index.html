@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Verificar URL de Deep Link en un iframe y cerrar</title>
+  <title>Verificar si la aplicación está instalada</title>
 </head>
 <body>
 
-<iframe id="miIframe" src="about:blank" style="display:none;"></iframe>
-<button onclick="verificarYCerrarIframe()">Abrir y verificar</button>
+<button onclick="verificarAppInstalada()">Verificar si la aplicación está instalada</button>
+<div id="resultado"></div>
 
 <script>
-function verificarYCerrarIframe() {
-  var deepLinkUrl = "com.appclubmiles://home"; // Cambia esto por tu URL de deep link
+function verificarAppInstalada() {
+  var appScheme = "com.appclubmiles://"; // Reemplaza esto con el esquema de URL de tu aplicación
 
-  var iframe = document.getElementById("miIframe");
-  iframe.src = deepLinkUrl;
-      iframe.style.display = "none";
+  // Intenta abrir la URL de la aplicación.
+  var testLink = document.createElement("a");
+  testLink.href = appScheme;
 
-  // Verificar cuando el iframe se ha cargado completamente
-  var interval = setInterval(function() {
-    if (iframe.contentWindow && iframe.contentWindow.location.href === "about:blank") {
-      clearInterval(interval);
-      alert("La URL de deep link se abrió y se cerró correctamente en el iframe.");
-
-      // Cierra el iframe ocultándolo y configurando su src en blanco
-      iframe.src = "about:blank";
-    }
-  }, 1000); // Verifica cada 1 segundo.
+  if (testLink.protocol === "ios:" || testLink.protocol === "android:") {
+    document.getElementById('resultado').innerHTML = "La aplicación está instalada.";
+  } else {
+    document.getElementById('resultado').innerHTML = "La aplicación no está instalada.";
+  }
 }
 </script>
 
 </body>
 </html>
-
