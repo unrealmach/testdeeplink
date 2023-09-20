@@ -10,15 +10,22 @@
 
 <script>
 function verificarAppInstalada() {
-  var appScheme = "com.appclubmiles://home"; // Reemplaza esto con el esquema de URL de tu aplicación
+  var appScheme = "com.appclubmiles://"; // Reemplaza esto con el esquema de URL personalizado de tu aplicación
 
-  // Intenta abrir la URL de la aplicación.
-  var testLink = document.createElement("a");
-  testLink.href = appScheme;
+  var a = document.createElement("a");
+  a.href = appScheme;
 
-  if (testLink.protocol === "ios:" || testLink.protocol === "android:") {
-    document.getElementById('resultado').innerHTML = "La aplicación está instalada.";
-  } else {
+  var xhr = new XMLHttpRequest();
+  xhr.open("HEAD", a.href, false);
+
+  try {
+    xhr.send();
+    if (xhr.status == 200) {
+      document.getElementById('resultado').innerHTML = "La aplicación está instalada.";
+    } else {
+      document.getElementById('resultado').innerHTML = "La aplicación no está instalada.";
+    }
+  } catch (error) {
     document.getElementById('resultado').innerHTML = "La aplicación no está instalada.";
   }
 }
